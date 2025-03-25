@@ -1,0 +1,23 @@
+# Все контейнеры для одновременного запуска
+services:
+  app1:
+    # Каждый раз когда запускаем compose - заново собираем образ с приложением
+    build:
+      # Где лежит файл сборки
+      context: .
+      # Как называется файл сборки
+      dockerfile: Dockerfile
+  app2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+  app3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+  balancer-nginx:
+    image: nginx:alpine3.21
+    ports:
+      - "6080:80"
+    volumes:
+      - ./conf/nginx:/etc/nginx/nginx.conf
